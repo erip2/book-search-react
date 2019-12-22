@@ -16,7 +16,15 @@ class BookSearch extends Component {
 
         fetch('https://www.googleapis.com/books/v1/volumes?q=' + e.target.value)
         .then(response => response.json())
-        .then(data => this.setState({results: data}));
+        .then(data => {
+            if(data.error) {
+                this.setState({results: []})
+            } else {
+                this.setState({results: data});
+                console.log(data);
+                }
+            }
+        );
     }
 
     render() {

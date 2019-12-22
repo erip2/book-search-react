@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SearchResults extends Component {
 
@@ -25,16 +26,24 @@ class SearchResults extends Component {
             console.log('none')
         } else {
             html = this.props.results.items.map((res) => {
+
+                let url = '/singlebook/' + res.id;
+
                 return(
-                    <div key={res.id}>
-                        <h3>{res.volumeInfo.title}</h3>
-                    </div>
+                    <Link to={url} key={res.id}>
+                        <div className="single-result">
+                            <div className="img-container">
+                                <img src={res.volumeInfo.imageLinks ? res.volumeInfo.imageLinks.thumbnail : ''}></img>
+                            </div>
+                            <h3>{res.volumeInfo.title}</h3>
+                        </div>
+                    </Link>
                 )
             })
         }
 
         return (
-            <div>
+            <div className="searchResults">
                 {html}
             </div>
         )

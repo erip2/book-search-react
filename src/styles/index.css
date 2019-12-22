@@ -1,5 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Goudy+Bookletter+1911&display=swap');
+
+.font {
+    font-family: 'Goudy Bookletter 1911', serif;
+}
+
+.searchResults {
+    display: grid;
+    margin: auto;
+    width: 70%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    margin-top: 140px;
+}
+
+.single-result {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.single-result img {
+    margin: auto;
+}
+
 @tailwind base;
 
 @tailwind components;
 
 @tailwind utilities;
+
+.single-book-container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.img-container, .img-container img {
+    width: 100%;
+}
