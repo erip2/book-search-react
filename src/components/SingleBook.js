@@ -18,25 +18,29 @@ class SingleBook extends Component {
             this.setState({ book: thisBook[0].volumeInfo });
             this.setState({ images: thisBook[0].volumeInfo.imageLinks });
 
-            console.log(this.state.book);
+            console.log(data);
         });
+
+        console.log(this.props.keyword);
     }
 
     render() {
 
         return (
-            <div className="single-book-container">
+            <React.Fragment>
                 <GoBack />
-                <div className="img-container">
-                    <img src={this.state.images.thumbnail}/>
+                <div className="single-book-container">
+                    <div className="img-container">
+                        <img src={this.state.images.thumbnail}/>
+                    </div>
+                    <div className="book-info">
+                        <h1>{this.state.book.title}</h1>
+                        <h2>By: {this.state.book.authors}</h2>
+                        <h2>Published by: {this.state.book.publisher}</h2>
+                        <p>{this.state.book.description}</p>
+                    </div>
                 </div>
-                <div className="book-info">
-                    <h1>{this.state.book.title}</h1>
-                    <h2>By: {this.state.book.authors}</h2>
-                    <h2>Published by: {this.state.book.publisher}</h2>
-                    <p>{this.state.book.description}</p>
-                </div>
-            </div>
+            </React.Fragment>
         )
     }
 }

@@ -12,6 +12,7 @@ function App() {
       <Switch>
         <Route path='/' component={BookSearch} exact/>
         <Route path='/singlebook/:bookId' component={SingleBook}/>
+        <Route path='/searchQuery=:keyword' component={BookSearch} />
         <Route component={Error} />
       </Switch>
   </div>
