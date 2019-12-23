@@ -33,9 +33,19 @@
 .single-book-container {
     display: flex;
     width: 80%;
-    margin: auto;
+    margin: 30px auto;
 }
 
 .img-container, .img-container img {
     width: 100%;
+}
+
+.img-container {
+    flex-basis: 30%;
+    margin-right: 30px;
+}
+
+.book-info h1 {
+    font-size: 40px;
+    font-family: 'Goudy Bookletter 1911', serif;
 }

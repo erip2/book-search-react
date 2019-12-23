@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import GoBack from './GoBack';
 
 class SingleBook extends Component {
 
@@ -6,13 +7,6 @@ class SingleBook extends Component {
         book: [],
         images: []
     }
-
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         book: []
-    //     }
-    // }
 
     componentWillMount = () => {
         const { bookId } = this.props.match.params;
@@ -32,12 +26,13 @@ class SingleBook extends Component {
 
         return (
             <div className="single-book-container">
+                <GoBack />
                 <div className="img-container">
                     <img src={this.state.images.thumbnail}/>
                 </div>
                 <div className="book-info">
                     <h1>{this.state.book.title}</h1>
-                    {/* <h2>By: {this.state.book.authors.map((auth) => auth)}</h2> */}
+                    <h2>By: {this.state.book.authors}</h2>
                     <h2>Published by: {this.state.book.publisher}</h2>
                     <p>{this.state.book.description}</p>
                 </div>
