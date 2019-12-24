@@ -3,8 +3,6 @@ import Input from './Input'
 import SearchResults from './SearchResults';
 import history from '../config/history';
 
-import ls from 'local-storage';
-
 class BookSearch extends Component {
     constructor(props) {
         super(props);
@@ -23,8 +21,6 @@ class BookSearch extends Component {
                 this.setState({results: []});
             } else {
                 this.setState({results: data});
-                // ls.set('bookSearch', data)
-                console.log(this.state.keyword);
             };
         });
     }
@@ -32,8 +28,12 @@ class BookSearch extends Component {
     componentDidMount() {
         var paragraph = this.props.location.pathname; 
         var regex = /[^=]*$/g; 
+
         var found = paragraph.match(regex); 
-        
+
+        if(found[0] == '/') {
+            return;
+        }
         this.setState({ searchKeyword: found[0] });
         this.getResults(found);
     }

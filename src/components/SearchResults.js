@@ -11,7 +11,7 @@ class SearchResults extends Component {
         let html;
 
         if (this.props.results.length == 0 || this.props.results == undefined) {
-            console.log('none')
+            return 'Your search results will display here';
         } else {
             html = this.props.results.items.map((res) => {
 
