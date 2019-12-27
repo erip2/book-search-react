@@ -9,6 +9,7 @@ class BookSearch extends Component {
         this.state = {
             searchKeyword: '',
             results: [],
+            appearHome: true
         }
         
     }

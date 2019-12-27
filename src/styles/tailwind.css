@@ -11433,6 +11433,10 @@ video {
   margin-right: 30px;
 }
 
+.book-info {
+  flex-basis: 70%;
+}
+
 .book-info h1 {
   font-size: 40px;
   font-family: 'Goudy Bookletter 1911', serif;

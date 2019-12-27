@@ -45,7 +45,39 @@
     margin-right: 30px;
 }
 
+.book-info {
+    flex-basis: 70%;
+}
+
 .book-info h1 {
     font-size: 40px;
     font-family: 'Goudy Bookletter 1911', serif;
+}
+
+.page {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+}
+
+/* appear - on page load */
+
+.fade-appear, .fade-enter {
+    opacity: 0;
+    z-index: 1;
+}
+
+.fade-appear.fade-appear-active, .fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms linear 150ms;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: opacity 150ms linear;
 }
