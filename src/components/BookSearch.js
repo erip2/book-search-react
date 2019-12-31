@@ -3,13 +3,16 @@ import Input from './Input'
 import SearchResults from './SearchResults';
 import history from '../config/history';
 
+import GoogleLogin from 'react-google-login';
+
 class BookSearch extends Component {
     constructor(props) {
         super(props);
         this.state = {
             searchKeyword: '',
             results: [],
-            appearHome: true
+            appearHome: true,
+            loggedIn: false
         }
         
     }
@@ -47,9 +50,27 @@ class BookSearch extends Component {
     }
 
     render() {
+
+
+        const responseGoogle = (response) => {
+            console.log(response);
+            
+            if(!response.error) {
+                this.setState({loggedIn: true});
+            }
+        }
+
         return (
             <div>
                 <Input value={this.state.searchKeyword} onChange={this.inputChange}/>
+                {this.loggedIn === true ? 'logged in' : <GoogleLogin
+                    clientId="903214775525-st1d865kef37o42vdgc3rbgu4itau0ni.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />}
+                
                 <SearchResults results={this.state.results} keyword={this.state.searchKeyword}/>
             </div>
         )

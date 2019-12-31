@@ -11442,6 +11442,36 @@ video {
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
+.page {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+}
+
+/* appear - on page load */
+
+.fade-appear, .fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-appear.fade-appear-active, .fade-enter.fade-enter-active {
+  opacity: 1;
+  -webkit-transition: opacity 300ms linear 150ms;
+  transition: opacity 300ms linear 150ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  -webkit-transition: opacity 150ms linear;
+  transition: opacity 150ms linear;
+}
+
 @media (min-width: 640px){
   .sm\:sr-only{
     position: absolute;
