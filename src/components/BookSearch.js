@@ -3,8 +3,6 @@ import Input from './Input'
 import SearchResults from './SearchResults';
 import history from '../config/history';
 
-import GoogleLogin from 'react-google-login';
-
 class BookSearch extends Component {
     constructor(props) {
         super(props);
@@ -12,19 +10,19 @@ class BookSearch extends Component {
             searchKeyword: '',
             results: [],
             appearHome: true,
-            loggedIn: false
         }
         
     }
 
     getResults = (value) => {
-        fetch('https://www.googleapis.com/books/v1/volumes?q=' + value)
+        fetch('https://www.googleapis.com/books/v1/volumes?q=' + value + '&maxResults=30')
         .then(response => response.json())
         .then(data => {
             if(data.error) {
                 this.setState({results: []});
             } else {
                 this.setState({results: data});
+                console.log(data);
             };
         });
     }
@@ -51,26 +49,9 @@ class BookSearch extends Component {
 
     render() {
 
-
-        const responseGoogle = (response) => {
-            console.log(response);
-            
-            if(!response.error) {
-                this.setState({loggedIn: true});
-            }
-        }
-
         return (
             <div>
                 <Input value={this.state.searchKeyword} onChange={this.inputChange}/>
-                {this.loggedIn === true ? 'logged in' : <GoogleLogin
-                    clientId="903214775525-st1d865kef37o42vdgc3rbgu4itau0ni.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                    cookiePolicy={'single_host_origin'}
-                />}
-                
                 <SearchResults results={this.state.results} keyword={this.state.searchKeyword}/>
             </div>
         )

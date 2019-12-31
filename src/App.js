@@ -6,12 +6,15 @@ import Error from './components/Error'
 import { Switch, Route } from 'react-router-dom';
 import SingleBook from './components/SingleBook';
 
+import Loading from './components/Loading';
+
 import { CSSTransition, TransitionGroup }  from 'react-transition-group';
 
 function App() {
   return (
-    <div className="App" >
-      <Route render={({location}) => (
+    <div className="App" className="h-full">
+      <Loading />
+      {/* <Route render={({location}) => (
          <TransitionGroup>
          <CSSTransition
             key={location.key}
@@ -26,7 +29,7 @@ function App() {
            </Switch>
          </CSSTransition>
        </TransitionGroup>
-      )} />
+      )} /> */}
   </div>
   );
 }

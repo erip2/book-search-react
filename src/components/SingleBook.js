@@ -34,6 +34,8 @@ class SingleBook extends Component {
                     this.setState({ images: thisBook[0].volumeInfo.imageLinks });
                 }
 
+                console.log(thisBook[0].volumeInfo);
+
             } else {
 
                 this.setState({ found: true })
