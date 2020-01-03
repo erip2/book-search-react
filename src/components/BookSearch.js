@@ -10,6 +10,7 @@ class BookSearch extends Component {
             searchKeyword: '',
             results: [],
             appearHome: true,
+            showImages: false
         }
         
     }
@@ -43,8 +44,13 @@ class BookSearch extends Component {
     inputChange = (e) => {
         this.setState({ searchKeyword: e.target.value });
         history.push('/searchQuery=' + e.target.value);
+        this.setState({ showImages: false });
 
         this.getResults(e.target.value);
+    }
+
+    changeImages = () => {
+        this.setState({ showImages: true });
     }
 
     render() {
@@ -52,7 +58,8 @@ class BookSearch extends Component {
         return (
             <div>
                 <Input value={this.state.searchKeyword} onChange={this.inputChange}/>
-                <SearchResults results={this.state.results} keyword={this.state.searchKeyword}/>
+                <SearchResults style={{ opacity: this.state.showImages ? 1 : 0 }} results={this.state.results} keyword={this.state.searchKeyword} 
+                        showImages={this.state.showImages} change={this.changeImages} />
             </div>
         )
     }

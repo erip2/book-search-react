@@ -1,7 +1,6 @@
 import React from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
-import ReactLoading from "react-loading";
 import * as bookLoading from '../styles/loading.json';
 
 import BookSearch from './BookSearch';
@@ -33,10 +32,6 @@ class Loading extends React.Component {
      }
 
     render() {
-
-        const color = {
-            color: '#fff'
-        }
 
         const defaultOptions = {
             loop: true,

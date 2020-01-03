@@ -77,7 +77,7 @@ class SingleBook extends Component {
                         <h2>By: {this.state.book.authors}</h2>
                         <h2>Published by: {this.state.book.publisher}</h2>
                         <p>{this.state.book.description}</p>
-                        <button onClick={this.addToCart} className={ReactDOMServer.renderToStaticMarkup(this.state.cart.added)}>Add to Cart</button>
+                        {/* <button onClick={this.addToCart} className={ReactDOMServer.renderToStaticMarkup(this.state.cart.added)}>Add to Cart</button> */}
                     </div>
                 </div>
                 }
