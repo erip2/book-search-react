@@ -16,7 +16,8 @@ class BookSearch extends Component {
     }
 
     getResults = (value) => {
-        fetch('https://www.googleapis.com/books/v1/volumes?q=' + value + '&maxResults=30')
+        fetch('https://www.googleapis.com/books/v1/users/0wfAXiH2TPY4kc7oVLMySMTlRAP2/bookshelves')
+        // fetch('https://www.googleapis.com/books/v1/volumes?q=' + value + '&maxResults=30')
         .then(response => response.json())
         .then(data => {
             if(data.error) {
