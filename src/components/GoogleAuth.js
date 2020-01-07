@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 
 class GoogleAuth extends Component {
+
     render() {
 
         const {
@@ -26,7 +27,22 @@ class GoogleAuth extends Component {
             marginRight: '10px'
         }
 
-        console.log(user);
+        // signInWithGoogle.then(function(result) {
+        //     // This gives you a Google Access Token.
+        //     var token = result.credential.accessToken;
+        //     // The signed-in user info.
+        //     var user = result.user;
+        
+        //     console.log(token);
+        // });
+
+        let signInWithGoogleEri = () => {
+            signInWithGoogle().then(function(result) {
+                console.log(result);
+               });
+        }
+
+        
 
 
         return (
@@ -39,7 +55,7 @@ class GoogleAuth extends Component {
                 {
                     user
                     ? <button onClick={signOut}>Sign out</button>
-                    : <button onClick={signInWithGoogle} style={btnStyles}><FontAwesomeIcon icon={faGoogle} className="mr-2"/>Sign in</button>
+                    : <button onClick={signInWithGoogleEri} style={btnStyles}><FontAwesomeIcon icon={faGoogle} className="mr-2"/>Sign in</button>
                 }
             </React.Fragment>
         )
@@ -54,7 +70,7 @@ const providers = {
   googleProvider: new firebase.auth.GoogleAuthProvider(),
 };
 
-
+providers.googleProvider.addScope('https://www.googleapis.com/auth/books');
 
 export default withFirebaseAuth({
     providers,

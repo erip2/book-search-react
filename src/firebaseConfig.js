@@ -1,5 +1,5 @@
 const config = {
-    apiKey: "AIzaSyDlqW8aSvDBgnPJUNTu5I0En-2ExxKCkpc",
+    apiKey: "AIzaSyDUv4r1JhZjvGLP-zTED_1G--UgI8FVAEU",
     authDomain: "book-search-react-ea418.firebaseapp.com",
     databaseURL: "https://book-search-react-ea418.firebaseio.com",
     projectId: "book-search-react-ea418",
