@@ -15,17 +15,27 @@ class BookSearch extends Component {
         
     }
 
+    userToken;
+
     getResults = (value) => {
-        fetch('https://www.googleapis.com/books/v1/users/101694754467267132232/bookshelves')
+        fetch('https://www.googleapis.com/auth/userinfo.profile', {
+            headers: {
+                'Authorization': 'Bearer ' + this.userToken
+            },
+        })
         // fetch('https://www.googleapis.com/books/v1/volumes?q=' + value + '&maxResults=30')
-        .then(response => response.json())
+        .then(response => {
+            response.json();
+            console.log(response.headers);
+        })
         .then(data => {
-            if(data.error) {
-                this.setState({results: []});
-            } else {
-                this.setState({results: data});
-                console.log(data);
-            };
+            // if(data.error) {
+            //     this.setState({results: []});
+            // } else {
+            //     this.setState({results: data});
+            //     console.log(data);
+            // };
+            console.log(data);
         });
     }
 
@@ -54,11 +64,16 @@ class BookSearch extends Component {
         this.setState({ showImages: true });
     }
 
+    getData = (val) => {
+        // do not forget to bind getData in constructor
+        this.userToken = val;
+    }
+
     render() {
 
         return (
             <div>
-                <Input value={this.state.searchKeyword} onChange={this.inputChange}/>
+                <Input value={this.state.searchKeyword} onChange={this.inputChange} sendData={this.getData}/>
                 <SearchResults style={{ opacity: this.state.showImages ? 1 : 0 }} results={this.state.results} keyword={this.state.searchKeyword} 
                         showImages={this.state.showImages} change={this.changeImages} />
             </div>

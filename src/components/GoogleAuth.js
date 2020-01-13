@@ -10,6 +10,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 
 class GoogleAuth extends Component {
 
+
     render() {
 
         const {
@@ -27,14 +28,19 @@ class GoogleAuth extends Component {
             marginRight: '10px'
         }
 
-        let signInWithGoogleEri = () => {
+        let dataForInput;
+
+        let signInWithGoogleData = () => {
             signInWithGoogle().then(function(result) {
-                console.log(result);
-               });
+                dataForInput = result;
+                sendDataAbove();
+            });
         }
 
-        
+        let sendDataAbove = () => {
+            this.props.sendData(dataForInput);
 
+        }
 
         return (
             <React.Fragment>
@@ -46,7 +52,7 @@ class GoogleAuth extends Component {
                 {
                     user
                     ? <button onClick={signOut}>Sign out</button>
-                    : <button onClick={signInWithGoogleEri} style={btnStyles}><FontAwesomeIcon icon={faGoogle} className="mr-2"/>Sign in</button>
+                    : <button onClick={signInWithGoogleData} style={btnStyles}><FontAwesomeIcon icon={faGoogle} className="mr-2"/>Sign in</button>
                 }
             </React.Fragment>
         )
