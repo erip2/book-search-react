@@ -36,7 +36,7 @@ class SearchResults extends Component {
                     <Link to={url} keyword={this.props.keyword} className="img-co" key={i}>
                         <div className="single-result">
                             <div className="img-container">
-                                <img onLoad={this.props.change} src={res.volumeInfo.imageLinks ? res.volumeInfo.imageLinks.thumbnail : ''} alt={res.volumeInfo.title}></img>
+                                <img /* This is the only change (onLoad function) */ onLoad={this.props.change} src={res.volumeInfo.imageLinks ? res.volumeInfo.imageLinks.thumbnail : ''} alt={res.volumeInfo.title}></img>
                             </div>
                             <h3>{res.volumeInfo.title}</h3>
                         </div>

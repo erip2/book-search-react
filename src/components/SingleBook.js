@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import GoBack from './GoBack';
 
-import ls from 'local-storage';
-
 class SingleBook extends Component {
     constructor(props) {
         super(props);
@@ -36,8 +34,6 @@ class SingleBook extends Component {
                 this.setState({ found: true })
             }
         });
-
-        this.setState({ cart: ls.get('cart') });
     }
 
 

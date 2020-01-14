@@ -39,7 +39,6 @@ class GoogleAuth extends Component {
 
         let sendDataAbove = () => {
             this.props.sendData(dataForInput);
-
         }
 
         return (
