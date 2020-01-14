@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Input from './Input'
 import SearchResults from './SearchResults';
 import history from '../config/history';
+import ls from 'local-storage';
 
 class BookSearch extends Component {
     constructor(props) {
@@ -15,14 +16,9 @@ class BookSearch extends Component {
         
     }
 
-    userToken;
+    userToken = ls.get('Token');
 
     getResults = (value) => {
-        // fetch('https://www.googleapis.com/auth/userinfo.profile', {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + this.userToken
-        //     },
-        // })
         fetch('https://www.googleapis.com/books/v1/volumes?q=' + value + '&maxResults=30')
         .then(response => response.json())
         .then(data => {
@@ -32,7 +28,6 @@ class BookSearch extends Component {
                 this.setState({results: data});
                 console.log(data);
             };
-            // console.log(data);
         });
     }
 
@@ -63,8 +58,9 @@ class BookSearch extends Component {
 
     getData = (val) => {
         // do not forget to bind getData in constructor
-        this.userToken = val;
-        console.log(this.userToken)
+        ls.set('Token', val.credential.accessToken);
+
+        this.userToken = ls.get('Token');
     }
 
     render() {
@@ -73,7 +69,7 @@ class BookSearch extends Component {
             <div>
                 <Input value={this.state.searchKeyword} onChange={this.inputChange} sendData={this.getData}/>
                 <SearchResults style={{ opacity: this.state.showImages ? 1 : 0 }} results={this.state.results} keyword={this.state.searchKeyword} 
-                        showImages={this.state.showImages} change={this.changeImages} />
+                        showImages={this.state.showImages} change={this.changeImages} token={this.userToken}/>
             </div>
         )
     }

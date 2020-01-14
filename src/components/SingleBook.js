@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import GoBack from './GoBack';
+import ls from 'local-storage';
+import Select from 'react-select';
 
 class SingleBook extends Component {
     constructor(props) {
@@ -7,7 +9,8 @@ class SingleBook extends Component {
         this.state = {
             book: [],
             images: [],
-            found: true
+            found: true,
+            bookshelves: []
         }
     }
 
@@ -33,7 +36,39 @@ class SingleBook extends Component {
 
                 this.setState({ found: true })
             }
+
+            this.getUserShelves();
+            console.log(this.state.bookshelves);
         });
+    }
+
+    getUserShelves = () => {
+        let token = ls.get('Token');
+
+        fetch('https://www.googleapis.com/books/v1/mylibrary/bookshelves', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            },
+        })
+        .then(result => result.json())
+        .then(data => {
+            // data.items.map((el) => {
+            //     console.log(el.title);
+            // });
+            // console.log(data);
+            this.setState({ bookshelves: data.items })
+        });
+        this.options = [];
+
+
+        this.state.bookshelves.map((el) => {
+            this.options.push({
+                'value': el.title,
+                'label': el.title
+            })
+        });
+
+        console.log(this.options);
     }
 
 
@@ -53,6 +88,10 @@ class SingleBook extends Component {
                         <h2>By: {this.state.book.authors}</h2>
                         <h2>Published by: {this.state.book.publisher}</h2>
                         <p>{this.state.book.description}</p>
+                        {this.state.bookshelves}
+                        <Select
+                            options={this.options}
+                        />
                     </div>
                 </div>
                 }
