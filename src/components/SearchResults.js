@@ -25,18 +25,18 @@ class SearchResults extends Component {
             }
         }
 
-        if (this.props.results.length == 0 || this.props.results == undefined) {
+        if (this.props.results.length === 0 || this.props.results === undefined) {
             return 'Your search results will display here';
         } else  {
             html = this.props.results.items.map((res, i, arr) => {
-                if(arr.length - 1 == i) {
+                if(arr.length - 1 === i) {
                     let url = '/singlebook/' + res.id;
 
                 return(
-                    <Link to={url} keyword={this.props.keyword} className="img-co">
+                    <Link to={url} keyword={this.props.keyword} className="img-co" key={i}>
                         <div className="single-result">
                             <div className="img-container">
-                                <img onLoad={this.props.change} src={res.volumeInfo.imageLinks ? res.volumeInfo.imageLinks.thumbnail : ''}></img>
+                                <img onLoad={this.props.change} src={res.volumeInfo.imageLinks ? res.volumeInfo.imageLinks.thumbnail : ''} alt={res.volumeInfo.title}></img>
                             </div>
                             <h3>{res.volumeInfo.title}</h3>
                         </div>
@@ -46,10 +46,10 @@ class SearchResults extends Component {
                     let url = '/singlebook/' + res.id;
 
                 return(
-                    <Link to={url} keyword={this.props.keyword} className="img-co">
+                    <Link to={url} keyword={this.props.keyword} className="img-co" key={i}>
                         <div className="single-result">
                             <div className="img-container">
-                                <img src={res.volumeInfo.imageLinks ? res.volumeInfo.imageLinks.thumbnail : ''}></img>
+                                <img src={res.volumeInfo.imageLinks ? res.volumeInfo.imageLinks.thumbnail : ''} alt={res.volumeInfo.title}></img>
                             </div>
                             <h3>{res.volumeInfo.title}</h3>
                         </div>
@@ -66,7 +66,7 @@ class SearchResults extends Component {
                 </div>
                 <div style={{ opacity: !this.props.showImages ? 1 : 0 }}>
                     <FadeIn>
-                        <div class="flex justify-content-center align-items-center h-100">
+                        <div className="flex justify-content-center align-items-center h-100">
                             <Lottie options={defaultOptions} height={400} width={400} />                      
                         </div>
                     </FadeIn>

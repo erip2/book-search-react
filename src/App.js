@@ -6,7 +6,7 @@ import Loading from './components/Loading';
 function App() {
 
   return (
-    <div className="App" className="h-full">
+    <div className="App h-full">
       <Loading />
   </div>
   );

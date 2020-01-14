@@ -18,24 +18,21 @@ class BookSearch extends Component {
     userToken;
 
     getResults = (value) => {
-        fetch('https://www.googleapis.com/auth/userinfo.profile', {
-            headers: {
-                'Authorization': 'Bearer ' + this.userToken
-            },
-        })
-        // fetch('https://www.googleapis.com/books/v1/volumes?q=' + value + '&maxResults=30')
-        .then(response => {
-            response.json();
-            console.log(response.headers);
-        })
+        // fetch('https://www.googleapis.com/auth/userinfo.profile', {
+        //     headers: {
+        //         'Authorization': 'Bearer ' + this.userToken
+        //     },
+        // })
+        fetch('https://www.googleapis.com/books/v1/volumes?q=' + value + '&maxResults=30')
+        .then(response => response.json())
         .then(data => {
-            // if(data.error) {
-            //     this.setState({results: []});
-            // } else {
-            //     this.setState({results: data});
-            //     console.log(data);
-            // };
-            console.log(data);
+            if(data.error) {
+                this.setState({results: []});
+            } else {
+                this.setState({results: data});
+                console.log(data);
+            };
+            // console.log(data);
         });
     }
 
@@ -45,7 +42,7 @@ class BookSearch extends Component {
 
         var found = paragraph.match(regex); 
 
-        if(found[0] == '/') {
+        if(found[0] === '/') {
             return;
         }
         this.setState({ searchKeyword: found[0] });
@@ -67,6 +64,7 @@ class BookSearch extends Component {
     getData = (val) => {
         // do not forget to bind getData in constructor
         this.userToken = val;
+        console.log(this.userToken)
     }
 
     render() {
