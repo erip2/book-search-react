@@ -30,6 +30,8 @@
 
 @tailwind utilities;
 
+@import '../../node_modules/react-notifications/lib/notifications.css';
+
 .single-book-container {
     display: flex;
     width: 80%;
