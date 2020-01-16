@@ -11417,6 +11417,8 @@ video {
   z-index: auto;
 }
 
+@import '../../node_modules/react-notifications/lib/notifications.css';
+
 .single-book-container {
   display: -webkit-box;
   display: flex;

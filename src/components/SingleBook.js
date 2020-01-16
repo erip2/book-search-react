@@ -16,6 +16,8 @@ class SingleBook extends Component {
         }
     }
 
+    shelvesId = [];
+
     componentWillMount = () => {
         const { bookId } = this.props.match.params;
 
@@ -63,7 +65,58 @@ class SingleBook extends Component {
                     })
                 });
             });
+
+            this.getThisBookShelves();
         }); 
+    }
+
+    getThisBookShelves = () => {
+        let token = ls.get('Token');
+        const userId = ls.get('UserId');
+        let shelvesInfo = [];
+        let counter = 0;
+
+        this.state.bookshelves.map((el) => {
+            this.shelvesId.push(el.id);
+        })
+
+        this.shelvesId.forEach((el, i) => {
+            fetch(`https://www.googleapis.com/books/v1/users/101895911035204620682/bookshelves/${el}/volumes`, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                shelvesInfo.push(data);
+                counter++;
+
+                if(counter === this.shelvesId.length) {
+                    this.checkShelves(shelvesInfo);
+                }
+            });
+        })
+    }
+
+    checkShelves = (shelves) => {
+        // console.log(shelves);
+
+        // shelves.forEach((el, i) => {
+        //     Object.assign(el, {['id']: this.shelvesId[i]});
+        // });
+
+        console.log(shelves);
+        console.log(this.shelvesId);
+
+        shelves.forEach((el) => {
+            if(el.totalItems > 0) {
+                el.items.forEach(e => {
+                    if(e.id == this.props.match.params.bookId) {
+                        //console.log(el);
+                    }
+                })
+            }
+        })
     }
 
     createNotification = (type) => {
@@ -92,7 +145,6 @@ class SingleBook extends Component {
     }
 
     addToShelf = (selectedOption) => {
-        //console.log('Add to this shelf:' + selectedOption.id);
         const { bookId } = this.props.match.params;
         let token = ls.get('Token');
 
@@ -125,6 +177,7 @@ class SingleBook extends Component {
                         <h2>Published by: {this.state.book.publisher}</h2>
                         <p>{this.state.book.description}</p>
                         <Select
+                            isMulti
                             value={selectedOption}
                             options={this.options}
                             onChange={this.handleChange}

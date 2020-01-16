@@ -59,8 +59,9 @@ class BookSearch extends Component {
     getData = (val) => {
         // do not forget to bind getData in constructor
         ls.set('Token', val.credential.accessToken);
-
+        ls.set('UserId', val.additionalUserInfo.profile.id);
         this.userToken = ls.get('Token');
+        console.log(val);
     }
 
     render() {
