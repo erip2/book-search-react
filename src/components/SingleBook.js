@@ -17,6 +17,7 @@ class SingleBook extends Component {
     }
 
     shelvesId = [];
+    shelvesAfterId = [];
 
     componentWillMount = () => {
         const { bookId } = this.props.match.params;
@@ -77,8 +78,10 @@ class SingleBook extends Component {
         let counter = 0;
 
         this.state.bookshelves.map((el) => {
-            this.shelvesId.push(el.id);
-        })
+            if(el.id !== 9) {
+                this.shelvesId.push(el.id);
+            }
+        });
 
         this.shelvesId.forEach((el, i) => {
             fetch(`https://www.googleapis.com/books/v1/users/101895911035204620682/bookshelves/${el}/volumes`, {
@@ -88,6 +91,7 @@ class SingleBook extends Component {
             })
             .then(response => response.json())
             .then(data => {
+                this.shelvesAfterId.push(el);
                 shelvesInfo.push(data);
                 counter++;
 
@@ -99,24 +103,20 @@ class SingleBook extends Component {
     }
 
     checkShelves = (shelves) => {
-        // console.log(shelves);
 
-        // shelves.forEach((el, i) => {
-        //     Object.assign(el, {['id']: this.shelvesId[i]});
-        // });
-
-        console.log(shelves);
-        console.log(this.shelvesId);
+        shelves.forEach((el, i) => {
+            Object.assign(el, {['id']: this.shelvesAfterId[i]});
+        });
 
         shelves.forEach((el) => {
             if(el.totalItems > 0) {
                 el.items.forEach(e => {
                     if(e.id == this.props.match.params.bookId) {
-                        //console.log(el);
+                        console.log(el);
                     }
                 })
             }
-        })
+        }); 
     }
 
     createNotification = (type) => {
@@ -162,6 +162,8 @@ class SingleBook extends Component {
 
         const { selectedOption } = this.state;
 
+        // console.log(this.options[0]);
+
         return (
             <React.Fragment>
                 <GoBack />
@@ -177,10 +179,13 @@ class SingleBook extends Component {
                         <h2>Published by: {this.state.book.publisher}</h2>
                         <p>{this.state.book.description}</p>
                         <Select
+                            defaultValue={this.options}
                             isMulti
-                            value={selectedOption}
+                            name="options"
                             options={this.options}
-                            onChange={this.handleChange}
+                            // onChange={this.handleChange}
+                            className="basic-multi-select"
+                            classNamePrefix="select"
                         />
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onClick={() => this.addToShelf(selectedOption)}>Add to selected shelf</button>
                     </div>
